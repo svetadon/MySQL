@@ -1,0 +1,44 @@
+Практическое задание по теме “Управление БД”
+
+***1. Установите СУБД MySQL. Создайте в домашней директории файл .my.cnf, задав в нем логин и пароль, 
+который указывался при установке.
+
+[client]
+USER=root
+password=****
+
+***2. Создайте базу данных example, разместите в ней таблицу users, состоящую из двух столбцов, числового id и строкового name.
+CREATE DATABASE example;
+
+USE example;
+
+CREATE TABLE example_users(
+id INT,
+name VARCHAR(50)
+);
+
+***3. Создайте дамп базы данных example из предыдущего задания, разверните содержимое дампа 
+в новую базу данных sample.
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump -u root -p example > C:\Users\1\Desktop\geekbrains\sql\examplesql\example_dump.sql
+Enter password: **********
+
+mysql> CREATE DATABASE sample;
+mysql> exit
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p sample < C:\Users\1\Desktop\geekbrains\sql\examplesql\example_dump.sql
+Enter password: **********
+
+mysql> USE sample;
+Database changed
+mysql> SHOW TABLES;
++------------------+
+| Tables_in_sample |
++------------------+
+| example_users    |
++------------------+
+1 row in set (0.00 sec)
+
+***(по желанию) Ознакомьтесь более подробно с документацией утилиты mysqldump. Создайте дамп единственной таблицы help_keyword базы данных mysql. Причем добейтесь того, чтобы дамп содержал только первые 100 строк таблицы.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqldump -u root -p --opt --where="1 limit 100" mysql example > example100.sql
+Отказано в доступе.
